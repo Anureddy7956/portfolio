@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anusha S · Coffee Corner</title>
+  <meta name="description" content="Interactive 3D portfolio of Anusha S — a South Indian filter-coffee shop built with Three.js.">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script type="importmap">
+    { "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    } }
+  </script>
+</head>
+<body>
+  <div id="loader">
+    <div class="namaste">नमस्ते</div>
+    <div class="bar"><span></span></div>
+    <button id="enter" disabled>Step into the Coffee Shop</button>
+  </div>
+
+  <canvas id="scene"></canvas>
+
+  <header class="hud">
+    <div class="brand">Anusha<span>.</span></div>
+    <nav id="menu">
+      <button data-go="about">About</button>
+      <button data-go="education">Education</button>
+      <button data-go="skills">Skills</button>
+      <button data-go="projects">Projects</button>
+      <button data-go="achievements">Achievements</button>
+      <button data-go="certs">Certifications</button>
+      <button data-go="contact">Contact</button>
+    </nav>
+  </header>
+
+  <div id="tooltip"></div>
+  <p class="hint">Drag to look around · Scroll to zoom · Click the glowing objects</p>
+
+  <aside id="panel" aria-hidden="true">
+    <button id="close" aria-label="Close">✕</button>
+    <div id="panel-body"></div>
+  </aside>
+
+  <template id="t-about">
+    <p class="kicker">☕ The Filter Coffee</p>
+    <h2>Hi, I'm Anusha S</h2>
+    <p>Computer Science undergraduate (Class of 2028) from Bangalore with a strong interest in <b>full-stack</b> and <b>IoT-based</b> applications.</p>
+    <p>I build responsive web apps and real-world projects — chatbots, OCR, and intrusion detection systems. I love scalable application design and problem-solving, preferably with a strong filter coffee in hand.</p>
+  </template>
+  <template id="t-education">
+    <p class="kicker">🛺 The Auto-Rickshaw</p>
+    <h2>Education</h2>
+    <div class="card"><h3>B.E. in Computer Science</h3><p>S J C Institute of Technology</p><p class="meta">2024 – 2028 · CGPA 8.15</p></div>
+  </template>
+  <template id="t-skills">
+    <p class="kicker">📚 The Book Stack</p>
+    <h2>Technical Skills</h2>
+    <div class="skill"><h4>Languages</h4><div class="chips"><span>C</span><span>C++</span><span>Java</span><span>Python</span></div></div>
+    <div class="skill"><h4>Web</h4><div class="chips"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Node.js</span></div></div>
+    <div class="skill"><h4>Tools</h4><div class="chips"><span>Git</span><span>GitHub</span><span>VS Code</span><span>Docker</span><span>Figma</span></div></div>
+    <div class="skill"><h4>Database</h4><div class="chips"><span>SQL</span><span>MongoDB</span></div></div>
+    <div class="skill"><h4>Core</h4><div class="chips"><span>DSA</span><span>OS</span><span>DBMS</span></div></div>
+  </template>
+  <template id="t-projects">
+    <p class="kicker">💻 The Laptop</p>
+    <h2>Projects</h2>
+    <a class="card link" href="https://github.com/Anureddy7956/chatbot" target="_blank" rel="noopener"><h3>Chatbot Application ↗</h3><p>Conversational chatbot with real-time interaction. Frontend and backend in JavaScript &amp; Node.js.</p></a>
+    <a class="card link" href="https://github.com/Anureddy7956/OCR" target="_blank" rel="noopener"><h3>OCR Text Recognition ↗</h3><p>Extracts text from images with OCR and OpenCV, with preprocessing to improve accuracy.</p></a>
+    <a class="card link" href="https://github.com/Anureddy7956/Face-Detection" target="_blank" rel="noopener"><h3>Face Detection System ↗</h3><p>Detects human faces using computer vision techniques in Python and OpenCV.</p></a>
+  </template>
+  <template id="t-achievements">
+    <p class="kicker">🏆 The Trophy</p>
+    <h2>Achievements</h2>
+    <div class="card"><h3>Hackathon Winner — NHCE Hackathon</h3><p>Smart Home Intrusion Detection System: IoT-based detection using sensors and Raspberry Pi, with a real-time monitoring dashboard.</p></div>
+    <div class="card"><h3>2nd Place — UI/UX Competition</h3></div>
+  </template>
+  <template id="t-certs">
+    <p class="kicker">🖼️ The Wall Frames</p>
+    <h2>Certifications</h2>
+    <div class="card"><h3>Generative AI Workshop</h3><p class="meta">IISc Bangalore</p></div>
+    <div class="card"><h3>IoT Workshop</h3><p class="meta">NMITE</p></div>
+    <div class="card"><h3>NASA Space Apps Challenge</h3><p class="meta">Participant</p></div>
+  </template>
+  <template id="t-contact">
+    <p class="kicker">📮 The Post Box</p>
+    <h2>Let's grab a coffee</h2>
+    <p>Open to internships, collaborations and good conversations.</p>
+    <a class="card link" href="mailto:17anureddy@gmail.com"><h3>✉ 17anureddy@gmail.com</h3></a>
+    <a class="card link" href="tel:+919740066913"><h3>☎ +91 97400 66913</h3></a>
+    <a class="card link" href="https://linkedin.com/in/anusha-s-500399330/" target="_blank" rel="noopener"><h3>in LinkedIn ↗</h3></a>
+    <a class="card link" href="https://github.com/Anureddy7956" target="_blank" rel="noopener"><h3>⌥ GitHub ↗</h3></a>
+  </template>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
